@@ -1,32 +1,44 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <router-view @ishowClick="ishowClick"/>
+    <maintabBar/>
+    <searchdetail v-show="ishow" @unishow="unishow"></searchdetail>
+    <play></play>
   </div>
 </template>
 
-<style lang="less">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+  import maintabBar from './components/content/maintabBar/maintabBar'
+  import play from 'views/detail/play'
+  import searchdetail from "views/detail/searchdetail"
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+  export default {
+    name:'App',
+    data(){
+      return {
+        ishow:false
+      }
+    },
+    components:{
+      maintabBar,
+      play,
+      searchdetail
+    },
+    methods:{
+      ishowClick(){
+        this.ishow=true;
+      },
+      unishow(){
+        this.ishow=false
+      },
+    },
   }
-}
+
+</script>
+
+<style lang="less">
+@import "assets/css/base.css";
+  #app{
+    touch-action: none;
+  }
 </style>
